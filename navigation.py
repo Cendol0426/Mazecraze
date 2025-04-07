@@ -103,6 +103,7 @@ class GridGraph:
 
         return unexplored
 
+    # BFS Pathfinding Algorithm
     def find_path(self, start, goal):
         """Find the shortest path between two positions using BFS"""
         if start == goal:
@@ -254,25 +255,32 @@ def navigate():
     # Mark initial position as explored
     map_graph.mark_explored(robot_pos)
 
-    # Simulate discovering walls with sensors (Up, Right, Down, Left)
-    sensor_readings = [True, False, False, True]  # Walls up and left
-    map_graph.update_map(robot_pos, sensor_readings)
+    # Repeat navigation
+    for i in range(10):
+        """
+        1st. Robot detect surrounding to update maps for walls and paths
+        2nd. Robot calculate next destination
+        3rd. Robot move
+        """
+        # Simulate discovering walls with sensors (Up, Right, Down, Left)
+        sensor_readings = [False, False, False, False]
+        map_graph.update_map(robot_pos, sensor_readings)
 
-    # Move robot
-    robot_pos = Position(1, 0)
-    map_graph.mark_explored(robot_pos)
+        # Calculate next exploration path
+        exploration_path = map_graph.calculate_exploration_path(robot_pos)
 
-    # for i in range(12):
-    # Calculate next exploration path
-    exploration_path = map_graph.calculate_exploration_path(robot_pos)
+        # Print results
+        print(f"Robot is at {robot_pos}")
+        print(f"Next exploration path: {exploration_path}")
+        print(exploration_path[1])
 
-    # Print results
-    print(f"Robot is at {robot_pos}")
-    print(f"Next exploration path: {exploration_path}")
-    print(exploration_path[1])
+        # Move robot
+        next_pos = exploration_path[1]
+        robot_pos = next_pos
+        map_graph.mark_explored(robot_pos)
 
-    # Print the map
-    map_graph.print_map()
+        # Print the map
+        map_graph.print_map()
 
 
 if __name__ == "__main__":
