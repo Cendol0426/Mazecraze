@@ -263,6 +263,7 @@ def navigate():
         3rd. Robot move
         """
         # Simulate discovering walls with sensors (Up, Right, Down, Left)
+        """ I suggest putting the orientation codes here together with the sensor reading part """
         sensor_readings = [False, False, False, False]
         map_graph.update_map(robot_pos, sensor_readings)
 
