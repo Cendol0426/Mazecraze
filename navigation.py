@@ -23,6 +23,11 @@ class Position:
         """String representation for debugging"""
         return f"({self.x},{self.y})"
 
+    # added but can be ignored     
+    def __str__(self) -> str:
+        """User-friendly string representation"""
+        return f"({self._x},{self._y})"
+
 
 class GridGraph:
     """
